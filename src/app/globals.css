@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* Light is the default palette; dark overrides via [data-theme="dark"].
+   Tuned per-mode rather than mechanically inverted — e.g. the accent blue
+   is darkened slightly in light mode for AA contrast on a white card. */
+:root {
+  --bg: #f7f8fa;
+  --card: #ffffff;
+  --card-hover: #f1f3f6;
+  --border: #e2e5ea;
+  --text: #0f172a;
+  --text-muted: #5b6472;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --success: #16a34a;
+  --warning: #b45309;
+  --danger: #dc2626;
+  --glass: rgba(255, 255, 255, 0.75);
+  --skeleton-a: #eef0f3;
+  --skeleton-b: #e2e5ea;
+  --row-hover: #f1f3f6;
+  --pie-1: #2563eb;
+  --pie-2: #16a34a;
+  --pie-3: #b45309;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a0b0f;
+  --card: #111317;
+  --card-hover: #171a21;
+  --border: #242933;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --success: #22c55e;
+  --warning: #eab308;
+  --danger: #ef4444;
+  --glass: rgba(17, 19, 23, 0.8);
+  --skeleton-a: #111317;
+  --skeleton-b: #1a1e27;
+  --row-hover: #1a1e27;
+  --pie-1: #3b82f6;
+  --pie-2: #22c55e;
+  --pie-3: #eab308;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1);
+}
+
+.card:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.kpi-value {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.table-row {
+  transition: background 0.1s ease;
+}
+
+.table-row:hover {
+  background: var(--row-hover);
+}
+
+.filter-chip {
+  transition: all 0.15s ease;
+}
+
+.filter-chip.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--skeleton-a) 25%, var(--skeleton-b) 50%, var(--skeleton-a) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% { background-position: -200% 0; }
+}
+
+.sparkline {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+
+.tab-active {
+  border-bottom: 2px solid var(--accent);
+  color: var(--text);
+}
+
+.metric-up { color: var(--success); }
+.metric-down { color: var(--danger); }
+
+.modal {
+  animation: modalEnter 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes modalEnter {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
